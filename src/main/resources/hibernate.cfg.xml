@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="use_sql_comments">false</property>
+
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <!--<property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/codechef?autoReconnect=true</property>-->
+        <property name="hibernate.connection.url">jdbc:mysql://mysqlUrl:port/codechef?autoReconnect=true</property>
+        <property name="hibernate.connection.username">mysql_username</property>
+        <!--<property name="hibernate.connection.password">zebronics@007</property>-->
+        <property name="hibernate.connection.password">mysql_password</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.connection.SetBigStringTryClob">true</property>
+
+        <!-- add classes to map from here -->
+        <mapping class="codechef.models.Problem" />
+        <mapping class="codechef.models.Votes" />
+        <mapping class="codechef.models.Reply" />
+        <mapping class="codechef.models.Comment" />
+        <mapping class="codechef.models.Post" />
+        <mapping class="codechef.models.User" />
+        <mapping class="codechef.models.Messages" />
+        <mapping class="codechef.models.Feed" />
+        <mapping class="codechef.models.Contests" />
+        <mapping class="codechef.models.Rankings" />
+        <mapping class="codechef.models.Friend" />
+        <mapping class="codechef.models.UserRating" />
+        <!--<mapping class="net.codejava.hibernate.model.Address" />-->
+    </session-factory>
+
+</hibernate-configuration>

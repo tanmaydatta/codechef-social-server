@@ -1,0 +1,11 @@
+codechef_social {
+	dev {
+		client_id: clientid
+		client_secret: clientsecret
+		FRIEND_JOB_INTERVAL: 1234 //optional
+		FRIEND_ACTIVITY_JOB_INTERVAL: 1234 //optional
+		CONTEST_JOB_INTERVAL: 1234 //optional
+		PROBLEM_JOB_INTERVAL: 1234 //optional
+		admin: admin_username
+	}
+}
