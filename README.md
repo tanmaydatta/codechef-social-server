@@ -4,7 +4,7 @@ Java 8 and MySql 5.7 should be installed.
 
 * Create a file named `codechef_social.conf` and place it in `/etc/codechef`. Sample file is included in the code.
 * Create database named `codechef` in mysql
-* Import the mysql [dump](http://) to your mysql database
+* Import the mysql [dump](https://www.dropbox.com/s/5q8n7xypl4kvg7j/structure.sql?dl=0) to your mysql database
 * In file `hibernate.cfg.xml`, change `connection.url` and `password` to your mysql database url and password
 * Run `./run.sh` to start the server
 
