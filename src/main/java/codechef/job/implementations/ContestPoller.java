@@ -121,17 +121,17 @@ public class ContestPoller extends TimerTask implements PollingTask {
             return false;
         }
 
-        if (content.getName().toLowerCase().contains("lunchtime")
-                || content.getName().toLowerCase().contains("cook-off")) {
-            return content.getName().toLowerCase().contains("division");
-        }
-        if (content.getName().toLowerCase().contains(" challenge ")) {
-            for (String m : monthName) {
-                if (content.getName().contains(m)) {
-                    return content.getName().toLowerCase().contains("division");
-                }
-            }
-        }
+//        if (content.getName().toLowerCase().contains("lunchtime")
+//                || content.getName().toLowerCase().contains("cook-off")) {
+//            return content.getName().toLowerCase().contains("division");
+//        }
+//        if (content.getName().toLowerCase().contains(" challenge ")) {
+//            for (String m : monthName) {
+//                if (content.getName().contains(m)) {
+//                    return content.getName().toLowerCase().contains("division");
+//                }
+//            }
+//        }
         return true;
     }
 

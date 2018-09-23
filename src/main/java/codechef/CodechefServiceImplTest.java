@@ -4,6 +4,7 @@ import codechef.api.CodechefApiClient;
 import codechef.api.models.CodechefProblemsResponse;
 import codechef.api.models.MessageApiModel;
 import codechef.api.models.MessageList;
+import codechef.job.TokenProvider;
 import codechef.models.Problem;
 import codechef.models.User;
 import codechef.models.UserRating;
@@ -29,6 +30,7 @@ public class CodechefServiceImplTest {
     private CodechefService service;
     private CodechefApiClient client;
     private FirebaseMessaging firebase;
+    private TokenProvider tokenProvider;
     private static final String[] categories = {"school", "easy", "medium", "hard", "challenge", "extcontest"};
 
     @BeforeMethod
@@ -37,6 +39,7 @@ public class CodechefServiceImplTest {
         service = injector.getInstance(CodechefServiceImpl.class);
         client = injector.getInstance(CodechefApiClient.class);
         firebase = injector.getInstance(FirebaseMessaging.class);
+        tokenProvider = injector.getInstance(TokenProvider.class);
     }
 
     @Test
@@ -49,7 +52,6 @@ public class CodechefServiceImplTest {
     @Test
     public void testAddProblem() {
         int reqCount = 0;
-        String accessToken = service.getNewToken("tanmaydatta", false).getAccessToken();
         for (int i = 0; i < categories.length; i++) {
             final String category = categories[i];
             int code = 9001;
@@ -57,15 +59,15 @@ public class CodechefServiceImplTest {
             while (code == 9001) {
                 if (reqCount >= 25) {
                     reqCount = 0;
-                    accessToken = service.getNewToken("tanmaydatta", false).getAccessToken();
+                    tokenProvider.refreshAdminToken();
                 }
+                String accessToken = tokenProvider.getAdminAccessToken();
                 CodechefProblemsResponse response;
                 try {
                     response = client.getProblemsByCategoryName(category,
                             offset, accessToken);
                     code = response.getResult().getData().getCode();
                 } catch (Exception e) {
-                    accessToken = service.getNewToken("tanmaydatta", false).getAccessToken();
                     continue;
                 }
                 reqCount++;
@@ -119,5 +121,17 @@ public class CodechefServiceImplTest {
     public void testRatingsOfFriends() {
         List<UserRating> ratings = service.getRatingsOfFriends(service.getUserById("tanmaydatta"));
         assert(ratings != null && ratings.size() > 0);
+    }
+
+    @Test
+    public void testRefreshToken() {
+        service.getNewToken(service.getUserById("jalebi").getAppToken(), false);
+    }
+
+    @Test
+    public void testRefreshTokenTokenProvider() throws Exception {
+        System.out.println("start");
+        tokenProvider.refreshToken("jalebi");
+        System.out.println("end");
     }
 }
